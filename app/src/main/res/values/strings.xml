@@ -1,0 +1,13 @@
+<resources>
+    <string name="app_name">Number Converter</string>
+    <string name="clearButton">CLEAR</string>
+    <string name="convertButton">CONVERT</string>
+    <string name="decLabel">Decimal:</string>
+    <string name="octLabel">Octal:</string>
+    <string name="hexLabel">Hex:</string>
+    <string name="binLabel">Binary:</string>
+    <string name="decDigits">Digits 0-9</string>
+    <string name="octDigits">Digits 0-7</string>
+    <string name="hexDigits">Digits 0-9 and A-F</string>
+    <string name="binDigits">Digits 0 and 1</string>
+</resources>
