@@ -36,12 +36,6 @@ public class ConversionsTests {
     }
 
     @Test
-    public void testFromDecimalSigned(){
-        String[] cons = Conversions.fromDecimal("-32");
-
-    }
-
-    @Test
     public void testFromOctal(){
         String[] cons = Conversions.fromOctal("1177254");
         assertEquals("327340", cons[0]);

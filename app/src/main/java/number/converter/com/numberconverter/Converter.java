@@ -4,8 +4,10 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.Toast;
 
 public class Converter extends AppCompatActivity {
 
@@ -36,22 +38,31 @@ public class Converter extends AppCompatActivity {
         String input = editedFeild.getText().toString();
         editedFeild.setEnabled(false);
         String[] conversions;
-        if(edited == 0){
-            conversions = Conversions.fromDecimal(input);
-        }else if(edited == 1){
-            conversions = Conversions.fromOctal(input);
-        }else if(edited == 2){
-            conversions = Conversions.fromHex(input);
-        }else{
-            conversions = Conversions.fromBinary(input);
-        }
-        int conversion = 0;
-        for(int i = 0; i < textFeilds.length; i++){
-            if(i == edited){
-                continue;
+        try{
+            if (edited == 0) {
+                conversions = Conversions.fromDecimal(input);
+            } else if (edited == 1) {
+                conversions = Conversions.fromOctal(input);
+            } else if (edited == 2) {
+                conversions = Conversions.fromHex(input);
+            } else {
+                conversions = Conversions.fromBinary(input);
             }
-            textFeilds[i].setText(conversions[conversion]);
-            conversion++;
+
+            int conversion = 0;
+            for(int i = 0; i < textFeilds.length; i++){
+                if(i == edited){
+                    continue;
+                }
+                textFeilds[i].setText(conversions[conversion]);
+                if(conversions[conversion].length() > textFeilds[i].getText().toString().length()){
+                    Log.d("Converter", "Size Mismatch at " + i);
+                }
+                conversion++;
+            }
+        }catch(Exception e){
+            Log.e("Converter", e.toString());
+            Toast.makeText(this, "Invalid Value. Please clear and try again.", Toast.LENGTH_SHORT).show();
         }
     }
 
@@ -62,6 +73,7 @@ public class Converter extends AppCompatActivity {
     public void clear(View view){
         for(EditText edit : textFeilds){
             edit.getText().clear();
+            edit.setMaxEms(10);
             edit.setEnabled(true);
         }
         oneActive = false;

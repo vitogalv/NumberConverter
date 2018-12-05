@@ -1,6 +1,8 @@
 package number.converter.com.numberconverter;
 
 import java.util.Stack;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 /**
  * This class contains all of the methods necessary to convert from one radix to the other radices
@@ -13,10 +15,25 @@ public class Conversions {
      * @return an array containing the other three number system forms of the provided value
      */
     public static String[] fromDecimal(String decimal){
+        Pattern pat = Pattern.compile("[A-Za-z./!@#$%^&*()+=;:'\"?><,|~]");
+        Matcher match = pat.matcher(decimal);
+        if(match.find()){
+            throw new IllegalArgumentException();
+        }
+        boolean neg = false;
+        if(decimal.charAt(0) == '-'){
+            decimal = decimal.replaceFirst("-", "");
+            neg = true;
+        }
         String[] retVal = new String[3];
         retVal[0] = decToRad(decimal, 8);
         retVal[1] = decToRad(decimal, 16);
         retVal[2] = decToRad(decimal, 2);
+        if(neg){
+            retVal[0] = "-" + retVal[0];
+            retVal[1] = "-" + retVal[1];
+            retVal[2] = "-" + retVal[2];
+        }
         return retVal;
     }
 
@@ -26,10 +43,25 @@ public class Conversions {
      * @return an array containing the other three number system forms of the provided value
      */
     public static String[] fromOctal(String octal){
+        Pattern pat = Pattern.compile("[A-Za-z8-9./!@#$%^&*()+=;:'\"?><,|~]");
+        Matcher match = pat.matcher(octal);
+        if(match.find()){
+            throw new IllegalArgumentException();
+        }
+        boolean neg = false;
+        if(octal.charAt(0) == '-'){
+            octal = octal.replaceFirst("-", "");
+            neg = true;
+        }
         String[] retVal = new String[3];
         retVal[0] = toDec(octal, 8);
         retVal[2] = octToBin(octal);
         retVal[1] = binToHex(retVal[2]);
+        if(neg){
+            retVal[0] = "-" + retVal[0];
+            retVal[2] = "-" + retVal[2];
+            retVal[1] = "-" + retVal[1];
+        }
         return retVal;
     }
 
@@ -39,10 +71,25 @@ public class Conversions {
      * @return an array containing the other three number system forms of the provided value
      */
     public static String[] fromHex(String hex){
+        Pattern pat = Pattern.compile("[G-Zg-z./!@#$%^&*()+=;:'\"?><,|~]");
+        Matcher match = pat.matcher(hex);
+        if(match.find()){
+            throw new IllegalArgumentException();
+        }
+        boolean neg = false;
+        if(hex.charAt(0) == '-'){
+            hex = hex.replaceFirst("-", "");
+            neg = true;
+        }
         String[] retVal = new String[3];
         retVal[0] = toDec(hex, 16);
         retVal[2] = hexToBin(hex);
         retVal[1] = binToOct(retVal[2]);
+        if(neg){
+            retVal[0] = "-" + retVal[0];
+            retVal[2] = "-" + retVal[2];
+            retVal[1] = "-" + retVal[1];
+        }
         return retVal;
     }
 
@@ -52,10 +99,25 @@ public class Conversions {
      * @return an array containing the other three number system forms of the provided value
      */
     public static String[] fromBinary(String binary){
+        Pattern pat = Pattern.compile("[A-Za-z2-9./!@#$%^&*()+=;:'\"?><,|~]");
+        Matcher match = pat.matcher(binary);
+        if(match.find()){
+            throw new IllegalArgumentException();
+        }
+        boolean neg = false;
+        if(binary.charAt(0) == '-'){
+            binary = binary.replaceFirst("-", "");
+            neg = true;
+        }
         String[] retVal = new String[3];
         retVal[0] = toDec(binary, 2);
         retVal[1] = binToOct(binary);
         retVal[2] = binToHex(binary);
+        if(neg){
+            retVal[0] = "-" + retVal[0];
+            retVal[1] = "-" + retVal[1];
+            retVal[2] = "-" + retVal[2];
+        }
         return retVal;
     }
 

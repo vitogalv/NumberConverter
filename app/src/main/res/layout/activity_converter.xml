@@ -85,7 +85,7 @@
                 android:ems="10"
                 android:hint="@string/decDigits"
                 android:importantForAutofill="no"
-                android:inputType="number"
+                android:inputType="numberSigned"
                 android:textColor="@android:color/white"
                 android:textSize="24sp" />
 
@@ -103,7 +103,7 @@
                 android:ems="10"
                 android:hint="@string/octDigits"
                 android:importantForAutofill="no"
-                android:inputType="number"
+                android:inputType="numberSigned"
                 android:textColor="@android:color/white"
                 android:textSize="24sp" />
 
@@ -121,7 +121,7 @@
                 android:ems="10"
                 android:hint="@string/hexDigits"
                 android:importantForAutofill="no"
-                android:inputType="textPersonName"
+                android:inputType="text"
                 android:textColor="@android:color/white"
                 android:textSize="24sp" />
 
